@@ -19,7 +19,7 @@ popup.init = () => {
     let link = document.getElementById('popup_link');
     if (link) {
         if (link.dataset.link && link.dataset.time) {
-            window.addEventListener('click', () => {
+            window.addEventListener('click keypress', () => {
                 if (popup.check(link.dataset.time)) {
                     popup.open(link.dataset.link);
                 }
