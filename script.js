@@ -1,12 +1,11 @@
 const popup = {};
-popup.time = 1;
 popup.key = 'click_popup_timer';
 popup.getTime = () => {
     return Math.floor((new Date()).getTime() / 1000);
 };
-popup.check = () => {
+popup.check = (time) => {
     if (localStorage.getItem(popup.key) !== null) {
-        if (popup.getTime() - localStorage.getItem(popup.key) <= popup.time) {
+        if (popup.getTime() - localStorage.getItem(popup.key) <= time) {
             return false;
         }
     }
@@ -19,9 +18,9 @@ popup.open = (url) => {
 popup.init = () => {
     let link = document.getElementById('popup_link');
     if (link) {
-        if (link.dataset.link) {
+        if (link.dataset.link && link.dataset.time) {
             window.addEventListener('click', () => {
-                if (popup.check()) {
+                if (popup.check(link.dataset.time)) {
                     popup.open(link.dataset.link);
                 }
             });
